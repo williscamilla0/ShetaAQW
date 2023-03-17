@@ -19,7 +19,6 @@ jobs:
       && ${{ contains(github.event.pull_request.labels.*.name, 'Release') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Install poetry
         run: pipx install poetry==$POETRY_VERSION
       - name: Set up Python 3.10
@@ -30,7 +29,6 @@ jobs:
       - name: Build project for distribution
         run: make build
       - name: Check Version
-        id: check-version
         run: |
           echo version=$(poetry version --short) >> $GITHUB_OUTPUT
       - name: Create Release
